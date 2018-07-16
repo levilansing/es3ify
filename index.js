@@ -108,6 +108,12 @@ function transform(code) {
     return jstransform.transform(visitorList, code).code;
 }
 
+function transformWithSourceMap(code) {
+  return jstransform.transform(visitorList, code, {
+    sourceMap: true
+  });
+}
+
 function process(file) {
     if (/\.json$/.test(file)) return through();
     var data = '';
@@ -137,4 +143,5 @@ module.exports.isReserved = function(word) {
     return reservedDict.hasOwnProperty(word) ? !!reservedDict[word] : false;
 };
 module.exports.transform = transform;
+module.exports.transformWithSourceMap = transformWithSourceMap;
 module.exports.visitorList = visitorList;
